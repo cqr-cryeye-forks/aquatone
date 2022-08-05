@@ -64,6 +64,7 @@ module Aquatone
     end
 
     def get_request(uri, options={})
+
       Aquatone::HttpClient.get(uri, options)
     end
 

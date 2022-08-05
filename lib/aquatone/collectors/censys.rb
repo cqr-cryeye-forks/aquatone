@@ -58,7 +58,7 @@ module Aquatone
 
           # If nothing returned from Censys, return:
           return unless response.parsed_response["results"]
-
+          print(response.parsed_response["results"])
           response.parsed_response["results"].each do |result|
 
             next unless result["parsed.extensions.subject_alt_name.dns_names"]

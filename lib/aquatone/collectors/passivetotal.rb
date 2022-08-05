@@ -17,9 +17,13 @@ module Aquatone
         )
         body = response.parsed_response
         if response.code != 200
-          failure(failure(body["message"] || "PassiveTotal API returned unexpected response code: #{response.code}"))
+          message = ''
+          if body.key?('message')
+            message = body["message"]
+          end
+          failure(failure(message || "PassiveTotal API returned unexpected response code: #{response.code}"))
         end
-        if !(body.key?("success") && body["success"])
+        unless body.key?("success") && body["success"]
           failure("Request failed")
         end
         body["subdomains"].each do |subdomain|
