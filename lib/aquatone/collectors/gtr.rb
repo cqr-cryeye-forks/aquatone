@@ -31,13 +31,18 @@ module Aquatone
 
       def request_page(token = nil)
         if token.nil?
-          uri = "#{BASE_URI}?domain=#{url_escape(domain.name)}&include_expired=true&include_subdomains=true"
+          uri = "#{BASE_URI}"
         else
-          uri = "#{BASE_URI}/page?domain=#{url_escape(domain.name)}&include_expired=true&include_subdomains=true&p=#{url_escape(token)}"
+          uri = "#{BASE_URI}/page?&p=#{url_escape(token)}"
         end
 
         get_request(uri,
-          { :format => :plain, :headers => { "Referer" => "https://transparencyreport.google.com/https/certificates" } }
+          {
+            :format => :plain,
+            :params => {"include_expired": 'true',
+                        'include_subdomains': 'true',
+                        'domain': url_escape(domain.name)},
+            :headers => { "Referer" => "https://transparencyreport.google.com/https/certificates" } }
         )
       end
 

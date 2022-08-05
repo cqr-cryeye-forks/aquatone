@@ -14,7 +14,7 @@ module Aquatone
         token = get_key("riddler_api")
         if token.nil? do
           auth_response = post_request("#{API_BASE_URI}/auth/login", {
-            :email    => get_key("riddler_username"),
+            :email    => get_key("riddler"),
             :password => get_key("riddler_password")
           }.to_json, {
                                          :headers  => { "Content-Type" => "application/json" }
