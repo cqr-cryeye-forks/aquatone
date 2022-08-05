@@ -4,8 +4,7 @@ module Aquatone
       self.meta = {
         :name         => "Riddler",
         :author       => "Joel (@jolle)",
-        :description  => "Uses Riddler by F-Secure to find hostnames",
-        :require_keys => %w[riddler riddler_password riddler_api]
+        :description  => "Uses Riddler by F-Secure to find hostnames. use api key as riddler_api or user/pass with riddler & riddler_password",
       }
 
       API_BASE_URI = "https://riddler.io"

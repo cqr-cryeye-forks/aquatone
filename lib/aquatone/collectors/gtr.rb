@@ -18,6 +18,12 @@ module Aquatone
         token = nil
         pages_to_process.times do
           response = parse_response(request_page(token))
+          if response.code == 404
+            failure("Google Transparency Report found nothing")
+          end
+          if response.code != 200
+            failure("HackerTarget API returned unexpected response code: #{response.code}")
+          end
           hosts    = response.first[1].map { |a| a[1] }.uniq
           hosts.each do |host|
             add_host(host) if valid_host?(host)
@@ -35,7 +41,6 @@ module Aquatone
         else
           uri = "#{BASE_URI}/page?&p=#{url_escape(token)}"
         end
-
         get_request(uri,
           {
             :format => :plain,
