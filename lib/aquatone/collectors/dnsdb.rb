@@ -7,8 +7,8 @@ module Aquatone
         :description => "Uses dnsdb.org to find hostnames"
       }
 
-      LINK_REGEX = /<a href="(.*?)\">(.*?)<\/a>/.freeze
-      INDEX_REGEX = /<a href="([0-9a-z]{1})">[0-9a-z]{1}<\/a>/.freeze
+      LINK_REGEX = /<a href="(.*?)">(.*?)<\/a>/.freeze
+      INDEX_REGEX = /<a href="([0-9a-z])">[0-9a-z]<\/a>/.freeze
 
       def run
         @base_url = "http://www.dnsdb.org/f/#{url_escape(domain.name)}.dnsdb.org/"

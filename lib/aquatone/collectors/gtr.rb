@@ -11,7 +11,7 @@ module Aquatone
         }
       }
 
-      BASE_URI                 = "https://www.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch"
+      BASE_URI                 = "https://transparencyreport.google.com/transparencyreport/api/v3/httpsreport/ct/certsearch"
       DEFAULT_PAGES_TO_PROCESS = 30.freeze
 
       def run
