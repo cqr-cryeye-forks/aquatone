@@ -7,7 +7,6 @@ require "optparse"
 
 require "httparty"
 require "childprocess"
-
 require "aquatone/version"
 require "aquatone/port_lists"
 require "aquatone/url_maker"
@@ -25,7 +24,7 @@ require "aquatone/collector"
 require "aquatone/detector"
 
 module Aquatone
-  AQUATONE_ROOT         = File.expand_path(File.join(File.dirname(__FILE__), "..")).freeze
+  AQUATONE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "..")).freeze
   DEFAULT_AQUATONE_PATH = File.join(Dir.home, "aquatone").freeze
 
   def self.aquatone_path

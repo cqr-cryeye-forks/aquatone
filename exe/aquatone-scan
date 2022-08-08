@@ -12,7 +12,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: aquatone-scan OPTIONS"
 
   opts.on("-d", "--domain DOMAIN", "Domain name to assess") do |v|
-    if !Aquatone::Validation.valid_domain_name?(v)
+    unless Aquatone::Validation.valid_domain_name?(v)
       puts "#{v} doesn't look like a valid domain name."
       exit 1
     end
@@ -20,10 +20,10 @@ OptionParser.new do |opts|
   end
 
   opts.on("-p", "--ports PORTS", "Ports to scan") do |v|
-    if v =~ /\A[\d,\s]{1,}\z/
+    if v =~ /\A[\d,\s]+\z/
       ports = v.split(",").map { |p| p.strip.to_i }
       ports.each do |p|
-        if !Aquatone::Validation.valid_tcp_port?(p)
+        unless Aquatone::Validation.valid_tcp_port?(p)
           puts "#{p} is not a valid TCP port."
           exit 1
         end
@@ -60,7 +60,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-j", "--jitter PERCENTAGE", "Jitter factor for sleep intervals") do |v|
-    if !v.to_i.between?(1, 100)
+    unless v.to_i.between?(1, 100)
       puts "Jitter factor must be between 1 and 100"
       exit 1
     end

@@ -1,6 +1,6 @@
 module Aquatone
   module Validation
-    DOMAIN_REGEX = /\A([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?\z/.freeze
+    DOMAIN_REGEX = /\A([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?\z/.freeze
     MIN_PORT     = 1.freeze
     MAX_PORT     = 65535.freeze
 

@@ -2,8 +2,8 @@ module Aquatone
   module Collectors
     class Publicwww < Aquatone::Collector
       self.meta = {
-        :name        => "PublicWWW",
-        :author      => "Michael Henriksen (@michenriksen)",
+        :name => "PublicWWW",
+        :author => "Michael Henriksen (@michenriksen)",
         :description => "Uses the publicwww.com source code search engine to find subdomains",
         :cli_options => {
           "publicwww-pages PAGES" => "Number of PublicWWW pages to process (default: 30)"

@@ -77,12 +77,29 @@ module Aquatone
       output("        /_/  #{subtitle.downcase} v#{Aquatone::VERSION} - by @michenriksen\n\n")
     end
 
-    def self.uncolorize(text); colorize(text.to_s, 0); end
-    def self.red(text); colorize(text.to_s, 31); end
-    def self.green(text); colorize(text.to_s, 32); end
-    def self.blue(text); colorize(text.to_s, 34); end
-    def self.yellow(text); colorize(text.to_s, 33); end
-    def self.bold(text); colorize(text.to_s, 1); end
+    def self.uncolorize(text)
+      ; colorize(text.to_s, 0);
+    end
+
+    def self.red(text)
+      ; colorize(text.to_s, 31);
+    end
+
+    def self.green(text)
+      ; colorize(text.to_s, 32);
+    end
+
+    def self.blue(text)
+      ; colorize(text.to_s, 34);
+    end
+
+    def self.yellow(text)
+      ; colorize(text.to_s, 33);
+    end
+
+    def self.bold(text)
+      ; colorize(text.to_s, 1);
+    end
 
     def thread_pool
       if options[:sleep]
@@ -96,7 +113,7 @@ module Aquatone
       return unless options[:sleep]
       seconds = options[:sleep].to_i
       if options[:jitter]
-        jitter  = (options[:jitter].to_f / 100) * seconds
+        jitter = (options[:jitter].to_f / 100) * seconds
         if rand.round == 0
           seconds = seconds - Random.rand(0..jitter.round)
         else
@@ -113,7 +130,7 @@ module Aquatone
 
     def asked_for_progress?
       begin
-        while c = STDIN.read_nonblock(1)
+        while (c = STDIN.read_nonblock(1))
           return true if c == "\n"
         end
         false

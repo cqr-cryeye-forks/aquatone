@@ -2,7 +2,7 @@ module Aquatone
   module Commands
     class Gather < Aquatone::Command
       def execute!
-        if !options[:domain]
+        unless options[:domain]
           output("Please specify a domain to assess\n")
           exit 1
         end
@@ -20,19 +20,19 @@ module Aquatone
       private
 
       def check_prerequisites
-        if !has_executable?("node")
+        unless has_executable?("node")
           output(red("node executable not found!\n\n"))
           output("Please make sure Node.js is installed on your system.\n")
           exit 1
         end
 
-        if !has_executable?("npm")
+        unless has_executable?("npm")
           output(red("npm executable not found!\n\n"))
           output("Please make sure NPM package manager is installed on your system.\n")
           exit 1
         end
 
-        if !Dir.exists?(File.join(Aquatone::AQUATONE_ROOT, "node_modules"))
+        unless Dir.exist?(File.join(Aquatone::AQUATONE_ROOT, "node_modules"))
           output("Installing Nightmare.js package, please wait...")
           Dir.chdir(Aquatone::AQUATONE_ROOT) do
             if system("npm install nightmare >/dev/null 2>&1")
@@ -46,12 +46,12 @@ module Aquatone
       end
 
       def prepare_tasks
-        if !@assessment.has_file?("hosts.json")
+        unless @assessment.has_file?("hosts.json")
           output(red("#{@assessment.path} does not contain hosts.json file\n\n"))
           output("Did you run aquatone-discover first?\n")
           exit 1
         end
-        if !@assessment.has_file?("open_ports.txt")
+        unless @assessment.has_file?("open_ports.txt")
           output(red("#{@assessment.path} does not contain open_ports.txt file\n\n"))
           output("Did you run aquatone-scan first?\n")
           exit 1
@@ -90,7 +90,7 @@ module Aquatone
               end
               jitter_sleep
               @task_count += 1
-            rescue Aquatone::Browser::Drivers::IncompatabilityError => e
+            rescue Aquatone::Browser::Drivers::IncompatibilityError => e
               output("\n")
               output(red("Incompatability Error:") + " #{e.message}\n")
               exit 1

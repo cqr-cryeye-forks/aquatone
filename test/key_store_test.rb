@@ -5,7 +5,7 @@ describe Aquatone::KeyStore do
 
   describe Aquatone::KeyStore::KEY_STORE_FILE_LOCATION do
     it "is a YAML file in the AQUATONE folder" do
-      Aquatone::KeyStore::KEY_STORE_FILE_LOCATION.must_equal File.join(Aquatone.aquatone_path, ".keys.yml")
+      _(Aquatone::KeyStore::KEY_STORE_FILE_LOCATION).must_equal File.join(Aquatone.aquatone_path, ".keys.yml")
     end
   end
 
@@ -18,8 +18,8 @@ describe Aquatone::KeyStore do
 
     describe "when key store file does not exist" do
       it "returns nil" do
-        File.stub :exists?, false do
-          Aquatone::KeyStore.get("key").must_be_nil
+        File.stub :exist?, false do
+          _(Aquatone::KeyStore.get("key")).must_be_nil
         end
       end
     end
@@ -27,7 +27,7 @@ describe Aquatone::KeyStore do
     describe "when given a key name that is not set" do
       it "returns nil" do
         File.stub :read, @key_file_contents do
-          Aquatone::KeyStore.get("somethingelse").must_be_nil
+          _(Aquatone::KeyStore.get("somethingelse")).must_be_nil
         end
       end
     end
@@ -35,7 +35,7 @@ describe Aquatone::KeyStore do
     describe "when given a key name that is set" do
       it "returns the key value" do
         File.stub :read, @key_file_contents do
-          Aquatone::KeyStore.get("key").must_equal "deadbeefdeadbeefdeadbeef"
+          _(Aquatone::KeyStore.get("key")).must_equal "deadbeefdeadbeefdeadbeef"
         end
       end
     end

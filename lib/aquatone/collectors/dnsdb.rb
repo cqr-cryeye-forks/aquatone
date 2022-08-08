@@ -19,7 +19,7 @@ module Aquatone
 
       def parse_page(url)
         response = get_request(url)
-        print(response)
+        output(response)
         if response.code != 200
           failure("DNSDB returned unexpected response code: #{response.code}")
         end

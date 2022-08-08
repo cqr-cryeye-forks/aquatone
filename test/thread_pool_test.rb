@@ -4,16 +4,16 @@ describe Aquatone::ThreadPool do
   describe ".initialize" do
     it "initializes the thread pool with given size" do
       pool = Aquatone::ThreadPool.new(5)
-      pool.pool.size.must_equal 5
+      _(pool.pool.size).must_equal 5
       pool.pool.each do |t|
-        t.must_be_kind_of Thread
+        _(t).must_be_kind_of Thread
       end
     end
 
     it "initializes an empty job queue" do
       pool = Aquatone::ThreadPool.new(5)
-      pool.jobs.must_be_kind_of Queue
-      pool.jobs.size.must_equal 0
+      _(pool.jobs).must_be_kind_of Queue
+      _(pool.jobs.size).must_equal 0
     end
   end
 
@@ -38,7 +38,7 @@ describe Aquatone::ThreadPool do
       @pool.shutdown
 
       expected_results = (1.upto(@pool_size * 3)).to_a
-      results.must_equal expected_results
+      _(results).must_equal expected_results
     end
 
     it "executes scheduled blocks in parallel" do
@@ -49,7 +49,7 @@ describe Aquatone::ThreadPool do
         @pool.shutdown
       end
 
-      elapsed.must_be :<, 4.5
+      _(elapsed).must_be :<, 4.5
     end
   end
 end

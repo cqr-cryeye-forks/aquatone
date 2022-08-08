@@ -2,18 +2,17 @@ module Aquatone
   module Collectors
     class Ptrarchive < Aquatone::Collector
       self.meta = {
-        :name        => "PTRArchive",
-        :author      => "Michael Henriksen (@michenriksen)",
+        :name => "PTRArchive",
+        :author => "Michael Henriksen (@michenriksen)",
         :description => "Uses ptrarchive.com to find subdomains"
       }
 
       def run
         response = get_request("http://ptrarchive.com/tools/search.htm?label=#{url_escape(domain.name)}&date=ALL&nonce=18000")
-        print(response)
         if response.code != 200
           failure("PTRArchive returned unexpected response code: #{response.code}")
         end
-        response.body.scan(/[a-z0-9\.\-_]+\.#{regex_escape(domain.name)}/).each do |host|
+        response.body.parsed_response.scan(/[a-z0-9\.\-_]+\.#{regex_escape(domain.name)}/).each do |host|
           add_host(host)
         end
       end

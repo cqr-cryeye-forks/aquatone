@@ -56,7 +56,7 @@ module Aquatone
     end
 
     def self.key_store_exists?
-      File.exists?(KEY_STORE_FILE_LOCATION)
+      File.exist?(KEY_STORE_FILE_LOCATION)
     end
 
     def self.serialize(keys)

@@ -44,6 +44,10 @@ module Aquatone
       fail NotImplementedError
     end
 
+    def output(text, clear_line = false)
+      self.class.output(text, clear_line)
+    end
+
     def execute!
       run
       hosts
@@ -106,6 +110,10 @@ module Aquatone
 
     def failure(message)
       fail Error, message
+    end
+
+    def warning(message)
+      warn Warning, message
     end
 
     def check_key_requirements!

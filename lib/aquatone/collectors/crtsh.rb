@@ -2,9 +2,9 @@ module Aquatone
   module Collectors
     class Crtsh < Aquatone::Collector
       self.meta = {
-        :name         => "Certificate Search",
-        :author       => "Joel (@jolle)",
-        :description  => "Uses crt.sh by COMODO CA to find hostnames"
+        :name => "Certificate Search",
+        :author => "Joel (@jolle)",
+        :description => "Uses crt.sh by COMODO CA to find hostnames"
       }
 
       def run

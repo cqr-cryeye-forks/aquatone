@@ -12,7 +12,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: aquatone-discover OPTIONS"
 
   opts.on("-d", "--domain DOMAIN", "Domain name to assess") do |v|
-    if !Aquatone::Validation.valid_domain_name?(v)
+    unless Aquatone::Validation.valid_domain_name?(v)
       puts "#{v} doesn't look like a valid domain name."
       exit 1
     end
@@ -26,7 +26,7 @@ OptionParser.new do |opts|
       exit 1
     end
     ips.each do |ip|
-      if !Aquatone::Validation.valid_ip?(ip)
+      unless Aquatone::Validation.valid_ip?(ip)
         puts "#{ip} is not a valid IP address."
         exit 1
       end
@@ -41,7 +41,7 @@ OptionParser.new do |opts|
       exit 1
     end
     ips.each do |ip|
-      if !Aquatone::Validation.valid_ip?(ip)
+      unless Aquatone::Validation.valid_ip?(ip)
         puts "#{ip} is not a valid IP address."
         exit 1
       end
@@ -81,7 +81,7 @@ OptionParser.new do |opts|
     known_collectors = Aquatone::Collector.descendants.map(&:sluggified_name)
     collectors       = v.split(",").map(&:strip).uniq
     collectors.each do |collector|
-      if !known_collectors.include?(collector)
+      unless known_collectors.include?(collector)
         puts "Unknown collector key: #{collector}"
         exit 1
       end
@@ -93,7 +93,7 @@ OptionParser.new do |opts|
     known_collectors = Aquatone::Collector.descendants.map(&:sluggified_name)
     collectors       = v.split(",").map(&:strip).uniq
     collectors.each do |collector|
-      if !known_collectors.include?(collector)
+      unless known_collectors.include?(collector)
         puts "Unknown collector key: #{collector}"
         exit 1
       end
@@ -114,7 +114,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-j", "--jitter PERCENTAGE", "Jitter factor for sleep intervals") do |v|
-    if !v.to_i.between?(1, 100)
+    unless v.to_i.between?(1, 100)
       puts "Jitter factor must be between 1 and 100"
       exit 1
     end

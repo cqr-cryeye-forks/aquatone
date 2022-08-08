@@ -2,7 +2,7 @@ module Aquatone
   module Commands
     class Discover < Aquatone::Command
       def execute!
-        if !options[:domain]
+        unless options[:domain]
           output("Please specify a domain to assess\n")
           exit 1
         end
@@ -38,7 +38,7 @@ module Aquatone
           end
         end
 
-        if !nameservers.empty?
+        unless nameservers.empty?
           output("Using nameservers:\n\n")
           nameservers.each do |ns|
             output(" - #{ns}\n")
@@ -63,7 +63,7 @@ module Aquatone
         output("Identifying wildcard IPs... ")
         20.times do
           wildcard_domain = "#{random_string}.#{@domain.name}"
-          if wildcard_ip = @resolver.resolve(wildcard_domain)
+          if (wildcard_ip = @resolver.resolve(wildcard_domain))
             @wildcard_ips << wildcard_ip unless @wildcard_ips.include?(wildcard_ip)
           end
         end
@@ -104,7 +104,7 @@ module Aquatone
                    "#{task_count} out of #{@hosts.count} hosts checked (#{@host_dictionary.keys.count} discovered); " \
                    "#{(task_count.to_f / @hosts.count.to_f * 100.00).round(1)}% done\n")
           end
-          if ip = @resolver.resolve(host)
+          if (ip = @resolver.resolve(host))
             next if exclude_ip?(ip)
             @host_dictionary[host] = ip
             output("#{ip.ljust(15)} #{bold(host)}\n")
@@ -117,7 +117,7 @@ module Aquatone
 
       def output_summary
         subnets = find_subnets
-        if !subnets.keys.count.zero?
+        unless subnets.keys.count.zero?
           output("Found subnets:\n\n")
           subnets.each_pair do |subnet, count|
             next if count == 1

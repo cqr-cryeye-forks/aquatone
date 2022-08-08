@@ -2,16 +2,16 @@ module Aquatone
   module Commands
     class Scan < Aquatone::Command
       def execute!
-        if !options[:domain]
+        unless options[:domain]
           output("Please specify a domain to assess\n")
           exit 1
         end
 
-        @assessment      = Aquatone::Assessment.new(options[:domain])
-        @tasks           = []
+        @assessment = Aquatone::Assessment.new(options[:domain])
+        @tasks = []
         @host_dictionary = {}
-        @results         = {}
-        @urls            = []
+        @results = {}
+        @urls = []
 
         banner("Scan")
         prepare_host_dictionary
@@ -21,7 +21,7 @@ module Aquatone
       end
 
       def prepare_host_dictionary
-        if !@assessment.has_file?("hosts.json")
+        unless @assessment.has_file?("hosts.json")
           output(red("#{@assessment.path} does not contain hosts.json file\n\n"))
           output("Did you run aquatone-discover first?\n")
           exit 1
@@ -41,7 +41,7 @@ module Aquatone
       end
 
       def scan_ports
-        pool        = thread_pool
+        pool = thread_pool
         @task_count = 1
         @ports_open = 0
         @start_time = Time.now.to_i
@@ -96,7 +96,7 @@ module Aquatone
       end
 
       def output_open_port(host, port)
-        if (@host_dictionary[host].count > 3)
+        if @host_dictionary[host].count > 3
           domains = @host_dictionary[host].shuffle.take(3).join(", ") + " and #{@host_dictionary[host].count - 3} more"
         else
           domains = @host_dictionary[host].take(3).join(", ")
